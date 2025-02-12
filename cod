@@ -1,0 +1,53 @@
+import java.util.Scanner;
+
+public class StringManipulator {
+    
+    public static String getUserInput() {
+        Scanner scanner = new Scanner(System.in);
+        String input;
+
+        while (true) {
+            System.out.print("Введіть строку (мінімум 2 слова): ");
+            input = scanner.nextLine().trim();
+            if (input.split("\\s+").length >= 2) {
+                break;
+            }
+            System.out.println("Помилка! Введіть хоча б два слова.");
+        }
+
+        return input;
+    }
+
+    public static String reverseString(String str) {
+        return new StringBuilder(str).reverse().toString();
+    }
+
+    public static String reverseEachWord(String str) {
+        String[] words = str.split("\\s+");
+        StringBuilder result = new StringBuilder();
+
+        for (String word : words) {
+            result.append(new StringBuilder(word).reverse()).append(" ");
+        }
+
+        return result.toString().trim();
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String input = getUserInput();
+
+        System.out.println("Оберіть дію:");
+        System.out.println("1 - Перевернути всю строку");
+        System.out.println("2 - Перевернути кожне слово окремо");
+        int choice = scanner.nextInt();
+
+        if (choice == 1) {
+            System.out.println(reverseString(input));
+        } else if (choice == 2) {
+            System.out.println(reverseEachWord(input));
+        } else {
+            System.out.println("Невірний вибір.");
+        }
+    }
+}
